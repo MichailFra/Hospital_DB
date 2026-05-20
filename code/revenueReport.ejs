@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Οικονομική Αναφορά (Q1) - Υγειόπολις</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f7f6; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #34495e; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        .money { text-align: right; font-weight: bold; color: #27ae60; }
+        .nav-button { display: inline-block; margin-bottom: 20px; padding: 10px 15px; background: #2980b9; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="/available-staff" class="nav-button">Προσωπικό Εφημερίας (Q8)</a>
+
+        <h1>Νοσοκομείο Υγειόπολις</h1>
+        <h2>Οικονομικό Dashboard: Έσοδα Ανά Τμήμα & Έτος</h2>
+
+        <% if (reportData && reportData.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Τμήμα</th>
+                        <th>Έτος</th>
+                        <th>Κωδικός ΚΕΝ</th>
+                        <th>Ασφαλιστικός Φορέας</th>
+                        <th>Αριθμός Νοσηλειών</th>
+                        <th>Βασικό Κόστος ΚΕΝ</th>
+                        <th>Πρόσθετη Χρέωση</th>
+                        <th>Συνολικά Έσοδα</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% reportData.forEach(function(row) { %>
+                        <tr>
+                            <td><%= row.Department_Name %></td>
+                            <td><%= row.Admission_Year %></td>
+                            <td><%= row.KEN_Code %></td>
+                            <td><%= row.Insurance_Carrier || 'Άγνωστος' %></td>
+                            <td style="text-align: center;"><%= row.Total_Admissions %></td>
+                            
+                            <td class="money"><%= Number(row.Total_Basic_Cost_KEN).toFixed(2) %> €</td>
+                            <td class="money"><%= Number(row.Total_Additional_Charge || 0).toFixed(2) %> €</td>
+                            <td class="money"><%= Number(row.Total_Revenue).toFixed(2) %> €</td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>Δεν βρέθηκαν οικονομικά δεδομένα.</p>
+        <% } %>
+    </div>
+
+</body>
+</html>

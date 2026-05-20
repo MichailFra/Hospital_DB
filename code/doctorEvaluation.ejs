@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Αξιολογήσεις Ιατρού (Q4)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f7f6; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .form-container { background: #fdf2e9; padding: 20px; margin-bottom: 20px; border-radius: 8px; border-left: 5px solid #e67e22; }
+        select, button { padding: 10px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
+        select { min-width: 300px; }
+        button { background-color: #e67e22; color: white; cursor: pointer; font-weight: bold; border: none; }
+        button:hover { background-color: #d35400; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 15px; text-align: center; }
+        th { background-color: #34495e; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .nav-button { display: inline-block; margin-bottom: 20px; padding: 10px 15px; background: #7f8c8d; color: white; text-decoration: none; border-radius: 5px; }
+        .score { font-size: 1.5em; font-weight: bold; color: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="/" class="nav-button">🔙 Επιστροφή στο Αρχικό Μενού</a>
+
+        <h1>Νοσοκομείο Υγειόπολις</h1>
+        <h2>Μέσος Όρος Αξιολογήσεων Ιατρού (Q4)</h2>
+
+        <div class="form-container">
+            <form action="/doctor-evaluation" method="GET">
+                <label for="doctorAMKA">Επιλέξτε Ιατρό:</label>
+                <select id="doctorAMKA" name="doctorAMKA" required>
+                    <option value="">-- Επιλέξτε Ιατρό --</option>
+                    <% doctors.forEach(function(doc) { %>
+                        <option value="<%= doc.AMKA %>" <%= selectedAMKA === doc.AMKA ? 'selected' : '' %>>
+                            <%= doc.last_name %> <%= doc.first_name %> (<%= doc.specialty %>)
+                        </option>
+                    <% }); %>
+                </select>
+                <button type="submit">Προβολή Αξιολόγησης</button>
+            </form>
+        </div>
+
+        <% if (hasSearched) { %>
+            <% if (evalResults.length > 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ΑΜΚΑ Ιατρού</th>
+                            <th>Μ.Ο. Ποιότητας Ιατρικής Φροντίδας (1-5)</th>
+                            <th>Μ.Ο. Συνολικής Εμπειρίας Νοσηλείας (1-5)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% evalResults.forEach(function(result) { %>
+                            <tr>
+                                <td><%= result.doctor_AMKA %></td>
+                                <td><span class="score">⭐ <%= Number(result.avg_medical_care_quality).toFixed(2) %></span></td>
+                                <td><span class="score">🏥 <%= Number(result.avg_overall_experience).toFixed(2) %></span></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>Δεν υπάρχουν καταχωρημένες αξιολογήσεις για τον επιλεγμένο ιατρό.</p>
+            <% } %>
+        <% } %>
+    </div>
+
+</body>
+</html>

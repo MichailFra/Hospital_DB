@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Αναζήτηση Διαθέσιμου Προσωπικού</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .form-container { background: #f9f9f9; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        input, select, button { padding: 8px; margin-right: 10px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #28a745; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>Νοσοκομείο Υγειόπολις</h1>
+    <h2>Διαθέσιμο Προσωπικό (Χωρίς Εφημερία)</h2>
+
+    <div class="form-container">
+        <form action="/available-staff" method="GET">
+            <label for="searchDate">Ημερομηνία:</label>
+            <input type="date" id="searchDate" name="searchDate" value="<%= searchDate %>" required>
+
+            <label for="departmentName">Τμήμα:</label>
+            <select id="departmentName" name="departmentName" required>
+                <option value="">Επιλέξτε Τμήμα...</option>
+                <% departments.forEach(function(dept) { %>
+                    <option value="<%= dept.name %>" <%= departmentName === dept.name ? 'selected' : '' %>>
+                        <%= dept.name %>
+                    </option>
+                <% }); %>
+            </select>
+
+            <button type="submit">Αναζήτηση</button>
+        </form>
+    </div>
+
+    <% if (hasSearched) { %>
+        <% if (staffList.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ΑΜΚΑ</th>
+                        <th>Όνομα</th>
+                        <th>Επώνυμο</th>
+                        <th>Τύπος Προσωπικού</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% staffList.forEach(function(staff) { %>
+                        <tr>
+                            <td><%= staff.AMKA %></td>
+                            <td><%= staff.first_name %></td>
+                            <td><%= staff.last_name %></td>
+                            <td><%= staff.staff_type %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>Δεν βρέθηκε διαθέσιμο προσωπικό για αυτή την ημερομηνία και τμήμα.</p>
+        <% } %>
+    <% } %>
+
+</body>
+</html>

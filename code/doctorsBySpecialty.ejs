@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Ιατροί ανά Ειδικότητα (Q2)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f7f6; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .form-container { background: #e8f4f8; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        input, select, button { padding: 10px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #2980b9; color: white; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #1f6391; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #34495e; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        .nav-button { display: inline-block; margin-bottom: 20px; padding: 10px 15px; background: #7f8c8d; color: white; text-decoration: none; border-radius: 5px; }
+        .badge-yes { background-color: #2ecc71; color: white; padding: 5px 10px; border-radius: 12px; font-size: 0.9em; }
+        .badge-no { background-color: #e74c3c; color: white; padding: 5px 10px; border-radius: 12px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="/" class="nav-button">🔙 Επιστροφή στο Αρχικό Μενού</a>
+
+        <h1>Νοσοκομείο Υγειόπολις</h1>
+        <h2>Αναζήτηση Ιατρών ανά Ειδικότητα (Q2)</h2>
+
+        <div class="form-container">
+            <form action="/doctors-by-specialty" method="GET">
+                <label for="specialty">Επιλέξτε Ειδικότητα:</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="">-- Επιλογή --</option>
+                    <% specialties.forEach(function(spec) { %>
+                        <option value="<%= spec.specialty %>" <%= selectedSpecialty === spec.specialty ? 'selected' : '' %>>
+                            <%= spec.specialty %>
+                        </option>
+                    <% }); %>
+                </select>
+                <button type="submit">Αναζήτηση</button>
+            </form>
+        </div>
+
+        <% if (hasSearched) { %>
+            <% if (doctorsList.length > 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ΑΜΚΑ</th>
+                            <th>Όνομα</th>
+                            <th>Επώνυμο</th>
+                            <th>Είχε Εφημερία Φέτος</th>
+                            <th>Σύνολο Επεμβάσεων (ως Κύριος Χειρουργός)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% doctorsList.forEach(function(doctor) { %>
+                            <tr>
+                                <td><%= doctor.AMKA %></td>
+                                <td><%= doctor.first_name %></td>
+                                <td><%= doctor.last_name %></td>
+                                <td>
+                                    <% if (doctor.had_shift_current_year === 'Ναι') { %>
+                                        <span class="badge-yes">Ναι</span>
+                                    <% } else { %>
+                                        <span class="badge-no">Όχι</span>
+                                    <% } %>
+                                </td>
+                                <td><strong><%= doctor.total_surgeries %></strong></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>Δεν βρέθηκαν ιατροί για την ειδικότητα: <strong><%= selectedSpecialty %></strong></p>
+            <% } %>
+        <% } %>
+    </div>
+
+</body>
+</html>
