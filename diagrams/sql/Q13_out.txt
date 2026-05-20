@@ -1,0 +1,10 @@
+starting_doctor_AMKA	current_doctor_first_name	current_doctor_last_name	current_doctor_rank	hierarchy_level	supervisor_AMKA	supervisor_first_name	supervisor_last_name	supervisor_rank
+01806798517	Στέφανος	Λυκούδης	Consultant_B	1	16999662103	Ελπίδα	Μωραΐτης	Consultant_A
+01806798517	Ελπίδα	Μωραΐτης	Consultant_A	2	NULL	NULL	NULL	NULL
+16999662107	Βασιλική	Καραμήτρου	Intern	1	16999662105	Παναγιώτης	Παπαβλάχος	Consultant_B
+16999662107	Παναγιώτης	Παπαβλάχος	Consultant_B	2	16999662106	Αθηνά	Γεωργίου	Consultant_A
+16999662107	Αθηνά	Γεωργίου	Consultant_A	3	16999662104	Ιωσήφ	Καρακώστας	Director
+16999662107	Ιωσήφ	Καρακώστας	Director	4	NULL	NULL	NULL	NULL
+21068257682	Ελπίδα	Λαζαρίδης	Consultant_B	1	02740632683	Μιχαήλ	Σκούρας	Consultant_A
+21068257682	Μιχαήλ	Σκούρας	Consultant_A	2	15257713289	Ηλίας	Σκαφιδάς	Director
+21068257682	Ηλίας	Σκαφιδάς	Director	3	NULL	NULL	NULL	NULL

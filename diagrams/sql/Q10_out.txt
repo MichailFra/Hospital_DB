@@ -1,0 +1,4 @@
+patient_AMKA	admission_code	Active_Substance_1	Active_Substance_2	frequency
+69896600012	69	Formoterol Fumarate Dihydrate, Beclometasone Dipropionate Anhydrous	Oxcarbazepine	1
+64450632434	173	Deferasirox	Povidone, Iodinated	1
+40267275181	131	Bcg (Bacillus Calmette-Guérin) Bacteria	Clotrimazole Ph. Eur.	1
