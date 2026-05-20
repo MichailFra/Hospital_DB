@@ -1,3 +1,0 @@
-id	select_type	table	type	possible_keys	key	key_len	ref	rows	r_rows	filtered	r_filtered	Extra
-1	SIMPLE	de	ref	doctor_AMKA,admission_code,idx_doctor_eval_doc	doctor_AMKA	44	const	8	8.00	100.00	100.00	Using index condition
-1	SIMPLE	ae	eq_ref	admission_code	admission_code	4	ergasiav8.de.admission_code	1	0.75	100.00	100.00	

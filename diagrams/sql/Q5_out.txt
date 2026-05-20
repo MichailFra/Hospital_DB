@@ -1,2 +1,0 @@
-AMKA	first_name	last_name	age	total_surgeries
-07284603446	Μαρία	Καλλέργης	31	3

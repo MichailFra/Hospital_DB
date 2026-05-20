@@ -1,4 +1,0 @@
-ICD-10_Code	Description	Year_1	Year_2	Admissions_Count
-A00	Χολέρα	2022	2023	5
-A00.0	Χολέρα από δονάκιο της χολέρας [Vibrio cholerae] 01, βιότυπο  cholerae	2021	2022	6
-A00.1	Χολέρα από στο δονάκιο της χολέρας [Vibrio cholerae] 01, βιότυπο eltor	2022	2023	8
